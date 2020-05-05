@@ -1,31 +1,27 @@
-#! usr/bin/env python3
 # Image Organizer 
 
-import os, datetime, time, shutil
+import os, time, shutil
 
-# tries to creaste new file it already exits continues on 
-try:
-    os.mkdir('/home/ronny/Desktop/images')
+desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+
+ 
+try:    # tries to creaste new file it already exits continues on 
+    os.mkdir(os.path.join(desktop,'Images'))
 except FileExistsError:
     pass
 
 while True:
-    files = os.listdir('/home/ronny/Desktop')
+    files = os.listdir(desktop)
 
     for item in files:
         if item.endswith(('png','jpg','jpeg')):
-            file_time = time.strftime("%a-%d-%m-%Y", time.localtime(os.path.getmtime(f'/home/ronny/Desktop/{item}')))
-
-            if not os.path.exists(f'/home/ronny/Desktop/images/{file_time}'):
+            # Gets the last time the file was modified
+            file_time = time.strftime("%a-%d-%m-%Y", time.localtime(os.path.getmtime(os.path.join(desktop, item))))
+            
+            if not os.path.exists(os.path.join(desktop, 'Images', file_time)): # Checks if sub folder exits, creates one if False 
                 current_date = time.strftime("%a-%d-%m-%Y", time.localtime())
-                os.mkdir(f'/home/ronny/Desktop/images/{current_date}')
-                shutil.move(f'/home/ronny/Desktop/{item}', f'/home/ronny/Desktop/images/{current_date}/{item}')
+                os.mkdir(os.path.join(desktop, 'Images', current_date))
+                shutil.move(os.path.join(desktop, item), os.path.join(desktop,'Images',current_date, item))
             else:
-                shutil.move(f'/home/ronny/Desktop/{item}', f'/home/ronny/Desktop/images/{file_time}/{item}')
+                shutil.move(os.path.join(desktop, item), os.path.join(desktop,'Images',file_time, item))
 
-      
-
-
-
-
-# use --> time.strftime("%a-%d-%m-%Y", time.localtime()) to get the current date 
