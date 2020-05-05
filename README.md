@@ -1,6 +1,6 @@
 # Img_organizer
-simple script to keep image files organized in folders named after the date they were created 
+Simple script to keep image files organized in folders named after the date they were created 
 
 
-
-the main purpose of the script is to practive with the datime and os module 
+## Why 
+The main purpose of the script is to practice with the time and os modules also to help those who are to busy to constantly create and move files especially when their job involves taking and saving muliple screenshots
